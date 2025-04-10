@@ -1,0 +1,1730 @@
+---
+title: "Practical Record: Business Analytics for Agriculture"
+author: "Name: Vijay,  Roll No: 1234"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    toc: true
+    toc-location: body
+    toc-title: "Table of Contents"
+    number-sections: true
+    toc-depth: 3
+    code-copy: true
+editor_options: 
+  chunk_output_type: console
+---
+
+---
+
+```{r}
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+knitr::opts_chunk$set(message = FALSE)
+```
+
+---
+
+# Introduction to R Programming
+
+## Basic R Scripts
+
+Below are a few examples of basic R scripts that demonstrate common tasks in R.
+
+### Example 1: Print "Hello World"
+
+A simple script that prints "Hello, World!" to the console.
+
+```{r}
+# Print "Hello, World!" to the console
+print("Hello, World!")
+```
+
+## Basic Operators 
+
+### Assignment Operator (`=` or `<-`)
+Use `<-` or `=` for assigning values to variables
+
+```{r}
+x=5
+x
+y <- 3
+y
+```
+
+### Commenting Code for Clarity
+
+Use `#` for comments. Comments are not executable and are used to provide relevant information about the syntax
+
+```{r}
+# Assigning values to x
+x=5
+x
+```
+
+### Arithmetic operators
+
+- Primary arithmetic operators available in R  are Addition `+` , Subtraction `-`, Multiplication `*`, Division `/`, Sqaure `^`
+
+```{r}
+# Perform arithmetic operations
+add <- 5 + 3
+
+# Print the results
+add
+```
+
+**Square (\^) operator** - Squares the first number by the second.
+
+```{r}
+x=5
+x^2
+```
+
+## Statements
+
+### Logical Operations
+
+**Equality**: `==` checks if two values are equal.
+
+```{r}
+# Equality 5 == 3
+x <- 5
+y <- 3
+x == y  
+```
+
+**Inequality**: `!=` checks if two values are not equal.
+
+```{r}
+# Inequality 5 != 3
+x != y  
+```
+
+**Greater than**: `>` checks if the value on the left is greater than the value on the right.
+
+```{r}
+# Greater than 5 > 3
+x > y   
+```
+
+**Less than**: `<` checks if the value on the left is less than the value on the right.
+
+```{r}
+# Less than 5 < 3
+x < y   
+```
+
+**Greater than or equal to**: `>=` checks if the value on the left is greater than or equal to the value on the right.
+
+```{r}
+# Greater than or equal to 5 >= 3
+x >= y  
+```
+
+**Less than or equal to**: `<=` checks if the value on the left is less than or equal to the value on the right.
+
+```{r}
+# Less than or equal to 5 <= 3
+y <= x 
+```
+
+## Data Structures
+
+### Vectors
+
+-   Vectors are one-dimensional arrays that can store numeric, character, or logical data.
+-   The `c()` function combines values into a vector. 
+
+```{r, filename="creating vector"}
+# Numeric vector
+age <- c(20, 21, 23)
+age
+# Character vector
+student <- c("ajay", "vijay", "jay")
+student
+# logical vector
+Pass<- c(TRUE, FALSE, TRUE) 
+Pass
+```
+
+### Matrix
+
+-   Created using the matrix() function. nrow is used to set number of rows and byrow is used to set values by rows (if TRUE) or columns (if FALSE).
+
+```{r}
+# Create a matrix with 2 rows and 3 columns
+my_matrix <- matrix(data = c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
+
+# Print the matrix
+print(my_matrix)
+```
+
+### Array
+
+-   Similar to matrices but can have more than two dimensions.
+-   Created using the array() function. dimensions are set using dim.
+
+```{r}
+# Create a 3-dimensional array with dimensions 3x3x2
+my_array <- array(data = c(1:18), dim = c(3, 3, 2))
+
+# Print the array
+print(my_array)
+```
+
+---
+
+## Functions
+
+Consists inbuilt functions like `sum()`, `length()`, `sqrt()`,`mean()`, `summary()`, `View()`
+
+### Arithmetic Functions
+
+#### sum() Function
+
+The `sum()` function calculates the total sum of all the elements in a numeric vector.
+
+```{r, filename="sum function"}
+# Calculate the sum of two variables
+x=5
+y=3
+z=2
+sum(x,y,z)
+# Calculate the sum of a numeric vector
+numbers <- c(1, 2, 3)
+sum(numbers)
+```
+
+#### length() Function
+
+The `length()` function returns the number of elements in a vector (or other objects).
+
+```{r, filename="length function"}
+# Find the length of a vector
+numbers <- c(1, 2, 3, 4, 5)
+length(numbers)
+```
+
+#### sqrt() Function
+
+The `sqrt()` function calculates the square root of each element in a numeric vector.
+
+```{r, filename="square root function"}
+# Calculate square root of a variable
+x=25
+sqrt(x)
+# Calculate the square root of each element in a numeric vector
+numbers <- c(1, 4, 9, 16, 25)
+sqrt(numbers)
+```
+
+### mean() Function
+
+The `mean()` function calculates the arithmetic mean (average) of the elements in a numeric vector.
+
+```{r,  filename="mean function"}
+# Example: Calculate the mean of a numeric vector
+numbers <- c(2,4,6)
+mean(numbers)
+```
+
+### summary() function
+
+The `summary()` function in R provides a concise statistical summary of objects like vectors, matrices, data frames, and results of model fitting.
+
+```{r,  filename="summary function"}
+# Create a numeric vector
+vec <- c(1, 2, 3, 4, 5, NA, 7, 8, 9, 10)
+
+# Get summary of the vector
+summary(vec)
+```
+
+### data.frame() function
+
+`data.frame()` function is used to create data frames, which are table-like structures consisting of rows and columns. 
+
+```{r, filename="creating data frame"}
+# Creating a simple data frame
+students <- data.frame(
+  Name = c("Arun", "Arun", "Charan", "Divya", "Eswar", 
+           "Fathima", "Gopal", "Harini", "Ilango", "Jayanthi",
+           "Kiran", "Lavanya", "Mohan", "Nandini", "Omkar", 
+           "Pavithra", "Qasim", "Raji", "Sanjay", "Tulsi"),
+  Age = c(25, 25, 35, 28, 22, 
+          40, 33, 27, 31, 29,
+          24, 26, NA, 28, 30,
+          27, 34, 29, NA, 26),
+  Height = c(5.6, 5.6, NA, 5.4, 6.0, 
+             5.3, 5.9, 5.5, 5.7, 5.8,
+             5.9, NA, 6.1, 5.4, 5.6,
+             5.5, 5.8, 5.3, 5.7, NA),
+  Gender = c("M", "M", NA, "F", "M", 
+             "F", "M", "F", "M", "F",
+             "M", "F", "M", NA, "M",
+             "F", "M", "F", "M", "F"),
+  Marks = c(75, 75, 79, 80, 81, 
+            82, 83, 84, 85, 86,
+            87, 88, 83, 82, 85, 
+            81, 79, 86, 84, 78),
+  Attendance = c(92, 92, 88, 90, 87, 
+                 95, 83, 89, 86, 91,
+                 90, 88, 85, 89, 93,
+                 87, 86, 91, 84, 90),
+  Residence = c("Day Scholar", "Day Scholar", "Hosteller", "Hosteller", "Day Scholar",
+                "Hosteller", "Hosteller", "Day Scholar", "Hosteller", "Day Scholar",
+                "Hosteller", "Day Scholar", "Hosteller", "Day Scholar", "Hosteller",
+                "Hosteller", "Day Scholar", "Hosteller", "Day Scholar", "Day Scholar")
+)
+
+students
+```
+
+### head() function
+
+The head() function in R is used to display the first few rows of a dataset.
+
+```{r, filename="creating data frame"}
+head(students)
+```
+
+### View() function
+
+`View() function` is used to invoke a spreadsheet-like data viewer on a data frame, matrix, or other objects.
+
+```{r, filename="View() function", eval=FALSE}
+# View function to see the data in a dedicated window
+View(students)
+```
+
+---
+
+### Loops
+
+Use `for`, `while`.
+
+#### for loop
+
+The for loop in R is used to iterate over a sequence (like a vector or a list) and execute a block of code for each element in the sequence.
+
+```{r, filename="for loop"}
+# Print numbers from 1 to 5
+for(i in 1:5) {
+  print(i)
+}
+```
+
+#### while loop
+
+The while loop executes a block of code as long as the specified condition is TRUE
+
+```{r, filename="while loop"}
+# Print numbers from 1 to 5 using while
+i <- 1  # Initialize counter
+while(i <= 4) {
+  print(i)
+  i <- i + 1  # Increment counte
+}
+```
+
+---
+
+## Directories and Projects in R
+
+### Setting a New Working Directory: 
+The `setwd()` function allows users to change the working directory.
+
+```{r, eval=FALSE}
+setwd("/Users/vijay/Library/")
+```
+
+### Current Working Directory:
+After setting a new directory, you can verify it by running `getwd()`.
+
+This helps users confirm where R is looking for files and where outputs will be saved.
+
+```{r}
+# Get the current working directory
+getwd()
+```
+
+---
+
+## Overview of Key R Packages
+
+- `stats`: Statistical analysis and hypothesis testing  
+- `plotly`: Interactive visualizations  
+- `tidyverse`: A collection of packages for data manipulation and visualization 
+
+### stats: Statistical Analysis and Hypothesis Testing in R
+
+The `stats` package comes pre-installed with R and provides essential statistical functions for data analysis.
+
+#### Basic Usage:
+```{r}
+# Descriptive statistics
+summary(mtcars$mpg)
+
+# t-test example
+t.test(mtcars$mpg ~ mtcars$am)
+
+# Linear regression
+model <- lm(mpg ~ wt, data = mtcars)
+summary(model)
+```
+
+### plotly: Creating Interactive Visualizations in R
+
+The `plotly` package enables the creation of **interactive and dynamic charts**.
+
+```{r, eval=FALSE}
+# Install and load the package
+install.packages("plotly")
+```
+
+```{r}
+library(plotly)
+
+# Create a simple scatter plot
+plot_ly(data = mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers")
+```
+
+### Tidyverse: collection of data science packages
+
+The **tidyverse** is a collection of R packages designed for **data science**. It provides a structured approach to **importing, manipulating, visualizing, and modeling** data.
+
+**Installing and Loading Tidyverse**
+
+```{r, eval=FALSE}
+# Install tidyverse
+install.packages("tidyverse")
+
+# Load all core tidyverse packages
+library(tidyverse)
+```
+
+This loads several useful packages such as **ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, and forcats**.
+
+#### Data Manipulation with dplyr
+
+```{r}
+library(dplyr)
+
+# Sample dataset
+data <- tibble(Name = c("John", "Alice", "Bob"), Score = c(85, 90, 78))
+
+# Filtering rows where Score > 80
+filtered_data <- data %>% filter(Score > 80)
+
+# Summarizing average score
+average_score <- data %>% summarize(Avg_Score = mean(Score))
+
+print(filtered_data)
+print(average_score)
+```
+
+#### Data Tidying with tidyr
+
+```{r}
+library(tidyr)
+
+# Sample dataset (wide format)
+data <- tibble(Name = c("A", "B"), Math = c(85, 90), Science = c(78, 92))
+
+# Convert to long format
+long_data <- pivot_longer(data, cols = c(Math, Science), names_to = "Subject", values_to = "Marks")
+
+print(long_data)
+```
+
+#### Data Visualization with ggplot2
+
+```{r}
+library(ggplot2)
+
+# Sample dataset
+data <- tibble(x = c(1, 2, 3, 4, 5), y = c(2, 4, 6, 8, 10))
+
+# Create a scatter plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_point(color = "blue") +
+  labs(title = "Scatter Plot", x = "X Values", y = "Y Values")
+```
+
+#### String Manipulation with stringr
+
+```{r}
+library(stringr)
+
+text <- "Welcome to R programming!"
+
+# Convert to lowercase
+lower_text <- str_to_lower(text)
+
+# Replace "R" with "Tidyverse"
+new_text <- str_replace(text, "R", "Tidyverse")
+
+print(lower_text)
+print(new_text)
+```
+
+#### Handling Factors with forcats
+
+```{r}
+# Load the library
+library(forcats)
+library(ggplot2)
+
+# Sample categorical data: Fruit purchases
+fruit <- factor(c("Apple", "Banana", "Apple", "Cherry", "Banana", "Banana", 
+                  "Apple", "Cherry", "Cherry", "Banana", "Apple"))
+
+# View original levels and frequency
+table(fruit)
+
+```
+
+---
+
+# Data Preparation and Transformation in R
+
+**Data Handling in R** refers to the **importing, managing, transforming, and cleaning** of data before analysis. 
+
+
+## Importing Data into R
+
+- R supports importing data from various sources, including ** Excel, CSV, databases(SQL), JSON, and APIs**.
+
+### Import csv file from website
+
+- use `read.csv()` function.
+- Sample csv [website link](https://raw.githubusercontent.com/yuvijen/Datasets/refs/heads/main/Diabetes.csv)
+
+```{r}
+# Read csv from website
+Diabetes <- read.csv("https://raw.githubusercontent.com/yuvijen/Datasets/refs/heads/main/Diabetes.csv")
+
+# Display the first few rows
+head(Diabetes)
+```
+
+### Import csv file from local folder
+
+**Sample csv data file** 
+
+- [Download the csv dataset from this link](https://raw.githubusercontent.com/yuvijen/Datasets/refs/heads/main/Agriculture%20production%20india.csv).
+
+- copy the file path name or file name (if working directory or project is set) of the dataset and paste it inside the `read.csv("file name")`
+
+```{r}
+# Read CSV file
+Indiaagriculture = read.csv("Agri production india.csv")
+
+# Display the first few rows
+head(Indiaagriculture)
+```
+
+### Import excel file from local folder
+
+To read Excel files in R, install the `readxl` package.
+
+**Install readxl package**
+
+```{r, eval=FALSE}
+install.packages("readxl")
+```
+
+**Sample data file**
+
+[Download the excel dataset from this link](https://github.com/yuvijen/Datasets/raw/refs/heads/main/Europeanagriculture.xlsx).
+
+- Save this excel file in your project or working directory. 
+- copy the file name (or file path name) of the dataset and paste it inside the function `read_excel("file_name")`
+
+```{r}
+library(readxl)
+Europeanagriculture = read_excel("Europeanagriculture.xlsx", sheet = 1)
+head(Europeanagriculture)
+```
+
+
+## Data file creation in R
+
+use `data.frame()` function
+```{r}
+# Create a simple data frame
+students <- data.frame(
+  Name = c("Arun", "Arun", "Charan", "Divya", "Eswar", 
+           "Fathima", "Gopal", "Harini", "Ilango", "Jayanthi",
+           "Kiran", "Lavanya", "Mohan", "Nandini", "Omkar", 
+           "Pavithra", "Qasim", "Raji", "Sanjay", "Tulsi"),
+  Age = c(25, 25, 35, 28, 22, 
+          40, 33, 27, 31, 29,
+          24, 26, NA, 28, 30,
+          27, 34, 29, NA, 26),
+  Height = c(5.6, 5.6, NA, 5.4, 6.0, 
+             5.3, 5.9, 5.5, 5.7, 5.8,
+             5.9, NA, 6.1, 5.4, 5.6,
+             5.5, 5.8, 5.3, 5.7, NA),
+  Gender = c("M", "M", NA, "F", "F", 
+             "F", "M", "F", "M", "F",
+             "M", "F", "M", NA, "M",
+             "F", "M", "F", "F", "M"),
+  Marks = c(58, 58, 65, 99, 89, 
+            80, 81, 82, 83, 83,
+            84, 84, 85, 85, 86, 
+            96, 87, 98, 97, 92),
+  Attendance = c(84, 84, 85, 85, 86, 
+                 86, 86, 87, 89, 89,
+                 89, 90, 90, 91, 81,
+                 92, 83, 95, 96, 94),
+  Residence = c("Day Scholar", "Day Scholar", "Hosteller", "Hosteller", "Day Scholar",
+                "Hosteller", "Hosteller", "Day Scholar", "Hosteller", "Day Scholar",
+                "Hosteller", "Day Scholar", "Hosteller", "Day Scholar", "Hosteller",
+                "Hosteller", "Day Scholar", "Hosteller", "Day Scholar", "Day Scholar")
+)
+
+# Gender and Residence are categorical variables, so convert them to factor
+students$Gender <- factor(students$Gender, 
+                 levels = c("M", "F"), 
+                 labels = c("Male", "Female"))
+students$Residence <- factor(students$Residence, 
+                 levels = c("Hosteller", "Day Scholar"), 
+                 labels = c("Hosteller", "Day Scholar"))
+
+students
+```
+
+---
+
+## Viewing and Exploring Data
+
+
+### Viewing data structure
+
+- `View()` - To view the entire table in a window
+- `head()` - View the first few rows
+- `str()` - Check structure of dataset
+- `summary()` - Summary statistics
+
+```{r}
+
+head(students)
+
+str(students)
+
+summary(students)
+```
+
+### Checking Missing Values
+```{r}
+# Count missing values per column
+colSums(is.na(students))
+```
+
+### Checking Duplicates
+```{r}
+# Identify duplicate rows
+duplicates <- students[duplicated(students), ]
+duplicates
+```
+
+### Handling missing values and imputations
+
+#### Replace missing values with mean
+
+```{r}
+
+# Create a copy of the original data for data cleaning. 
+
+clean <- students
+#  Calculate the mean height (excluding NA)
+mean_height <- mean(clean$Height, na.rm = TRUE)
+
+# Replace NA values in Height with the calculated mean
+clean$Height[is.na(clean$Height)] <- mean_height
+
+clean
+```
+
+#### Remove missing values
+
+```{r}
+clean <- na.omit(clean)
+
+# Reset row numbering
+rownames(clean) <- NULL
+
+clean
+```
+#### Removing Duplicates
+
+```{r}
+clean <- clean[!duplicated(clean), ]
+
+# Reset row numbering
+rownames(clean) <- NULL
+
+clean
+```
+
+### Changing Data Types
+```{r}
+# Convert column to numeric
+clean$Height <- as.numeric(clean$Height)
+
+# Convert column to character
+clean$Name <- as.character(clean$Name)
+str(clean)
+```
+
+### Data Manipulation with `dplyr`
+
+#### Selecting Specific Columns
+
+- Install dplyr package
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+```
+
+```{r}
+library(dplyr)
+
+# Select specific columns
+clean <- clean %>% select(Name,Age,Residence, Gender, Marks, Attendance)
+clean
+```
+
+#### Removing Columns
+```{r}
+# Remove specific columns
+clean <- clean %>% select(-Residence)
+clean
+```
+
+#### Filtering Data
+```{r}
+# Filter rows where column value is greater than 100
+clean <- clean %>% filter(clean$Attendance >= 85)
+clean
+```
+
+#### Sorting Data
+```{r}
+# Arrange data in descending order
+clean <- clean %>% arrange(desc(clean$Marks))
+clean
+```
+
+### Reshaping Data with `tidyr`
+
+
+#### Converting Wide Data to Long Format
+```{r}
+library(tidyr)
+
+clean <- clean %>% pivot_longer(cols = c("Marks", "Attendance"), names_to = "Measure",values_to = "Value")
+clean
+```
+
+#### Converting long data to wide format
+
+```{r}
+# Assuming your current dataframe is named 'clean' in long format:
+clean <- clean %>% pivot_wider(names_from = Measure, values_from = Value)
+
+clean
+```
+
+
+###  Exporting Data from R
+
+#### Export the data file as a csv file to local folder
+
+
+`write.csv(data, "folder path/filename.csv")`
+To save the CSV in a specific folder, provide the path.
+
+```{r}
+# Export the data frame as csv
+write.csv(clean, "cleanstudentsdata.csv")
+```
+
+#### Export data file as a excel file to local folder
+
+The `writexl` package provides an easy way to export data from R into an Excel file.
+
+**Install writexl package**
+
+```{r, eval=FALSE}
+install.packages("writexl")
+```
+
+- export the clean data file as xlsx file. 
+
+```{r}
+library(writexl)
+# Write data to an Excel file
+write_xlsx(clean, "cleanstudentsdata.xlsx")
+```
+
+### Normalization
+
+```{r}
+
+# Sample dataset
+df <- data.frame(Height = c(150, 160, 170, 180, 190, 200),
+                   Weight = c(50, 60, 65, 75, 80, 90))
+
+# Min-Max Normalization function
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+
+# Apply normalization to dataset
+df_normalized <- as.data.frame(lapply(df, normalize))
+
+# Print results
+df_normalized
+```
+
+
+### Standardization
+
+```{r}
+# Standardization function (Z-score scaling)
+standardize <- function(x) {
+  return ((x - mean(x)) / sd(x))
+}
+
+# Apply standardization
+df_standardized <- as.data.frame(lapply(df, standardize))
+
+# Print results
+df_standardized
+```
+
+### Creating Dummy Variables
+
+#### Using `ifelse()` for Binary Categories
+
+If a variable has two categories (e.g., Male/Female), we can create a dummy variable using `ifelse()`.
+
+```{r}
+# Sample dataset
+  data <- data.frame(Gender = c("Male", "Female", "Male", "Female", "Male"))
+
+# Create a dummy variable for "Male" (1 = Male, 0 = Female)
+  data$Male_Dummy <- ifelse(data$Gender == "Male", 1, 0)
+
+print(data)
+```
+
+#### Using `model.matrix()` for Multiple Categories
+
+For categorical variables with more than two categories, one-hot encoding is used to create multiple dummy variables.
+
+
+```{r}
+# Sample dataset
+  data <- data.frame(Department = c("HR", "IT", "Finance", "HR", "IT"))
+
+# Create dummy variables
+  dummy_vars <- model.matrix(~ Department - 1, data = data)
+
+# Convert to dataframe
+  dummy_vars_df <- as.data.frame(dummy_vars)
+
+# Print dataset
+  print(dummy_vars_df)
+```
+
+---
+
+# Data visualization
+
+## 2D data visualization techniques
+
+### Scatter Plot
+In R, you can use the `plot()` function from the base package to create a scatter plot.
+
+```{r}
+
+# Create a scatter plot
+plot(clean$Marks, clean$Attendance, main="Scatter Plot of Marks vs. Attendance", 
+     xlab="Marks", ylab="Attendance", pch=19, col="red")
+```
+
+
+### Histogram
+In R, you can use the `hist()` function from the base package to create a histogram.
+
+```{r}
+# Vector of scores
+# Create a histogram
+hist(clean$Age, breaks=5, col="blue", main="Histogram of Marks", xlab="Marks", ylab="Frequency")
+```
+
+### Bar Charts
+
+#### Simple Bar Chart
+
+```{r}
+
+# Calculate average marks by gender
+avg_marks <- tapply(clean$Marks, clean$Gender, mean)
+
+# Create barplot
+barplot(avg_marks,
+        col = "navy",
+        main = "Average Marks by Gender",
+        ylab = "Average Marks",
+        xlab = "Gender")
+
+```
+
+#### Sub-divided (Stacked) Bar Chart
+
+```{r}
+
+
+# Stacked Bar Chart
+barplot(rbind(clean$Attendance, clean$Marks), beside=FALSE, col=c("yellow", "red"), 
+        legend.text=c("Attendance", "Marks"), names.arg=clean$Name,
+        main="Stacked Bar Chart", ylab="Quantity")
+```
+
+#### Multiple Bar Chart
+
+```{r}
+
+# Stacked Bar Chart
+barplot(rbind(clean$Attendance, clean$Marks), beside=TRUE, col=c("yellow", "red"), 
+        legend.text=c("Attendance", "Marks"), names.arg=clean$Name,
+        main="Stacked Bar Chart", ylab="Quantity")
+```
+
+### Line Plot
+
+```{r}
+library(ggplot2)
+
+# Create a data frame with monthly sales data
+data <- data.frame(
+  Month = factor(c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'), levels = c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun')),
+  Sales = c(200, 210, 190, 215, 205, 230)
+)
+
+# Plotting the line graph
+ggplot(data, aes(x=Month, y=Sales)) +
+  geom_line(group=1, colour="blue") +
+  geom_point() +
+  labs(title="Monthly Sales Data", x="Month", y="Sales") +
+  theme_minimal()
+```
+
+### Pie Chart
+
+```{r}
+# Summarize total marks for each gender by grouping 'Marks' based on 'Gender'
+gender_marks <- tapply(clean$Marks, clean$Gender, sum, na.rm = TRUE)
+
+percent <- round(gender_marks / sum(gender_marks) * 100)
+labels <- paste(names(gender_marks), percent, "%")
+
+# Plot pie chart with value labels
+pie(gender_marks,
+    labels = labels,
+    col = c("skyblue", "pink"),
+    main = "Total Marks by Gender")
+```
+
+## 3D data visualization techniques
+
+### 3D Pie Chart
+
+```{r}
+
+library(plotly)
+
+# Data
+categories <- c("Apple", "Banana", "Cherry")
+values <- c(300, 450, 250)
+
+# 3D Pie Chart using plotly
+fig <- plot_ly(labels = categories, values = values, type = 'pie', textinfo = 'label+percent',
+               insidetextorientation = 'radial', marker = list(colors = c('#FF9999', '#66B3FF', '#99FF99')))
+fig <- fig %>% layout(title = "3D Pie Chart", showlegend = TRUE)
+fig
+```
+
+
+
+### 3D Scatter Plot
+
+```{r}
+library(plotly)
+students <- students[!is.na(students$Gender), ]
+
+# Convert Gender to numeric (e.g., Male = 1, Female = 2)
+students$Gender_Num <- as.numeric(as.factor(students$Gender))
+
+# Create 3D scatter plot
+plot_ly(students, x = ~Age, y = ~Marks, z = ~Gender_Num, type = "scatter3d", mode = "markers",
+        marker = list(size = 5, color = ~Gender_Num, colorscale = "Viridis")) %>%
+  layout(title = "3D Scatter Plot of Students",
+         scene = list(
+           xaxis = list(title = "Age"),
+           yaxis = list(title = "Marks"),
+           zaxis = list(title = "Gender (Numeric)")
+         ))
+```
+
+---
+
+# Descriptive Analytics
+
+## Measures of Central Tendency
+
+**Mean**
+
+```{r}
+# Define the vector of exam scores
+exam_scores <- c(85, 90, 78, 92, 85)
+
+# Calculate the mean (average) score
+mean_score <- mean(exam_scores)
+
+# Print the result
+print(mean_score)
+```
+
+**Median**
+
+```{r}
+
+# Define the vector of exam scores
+exam_scores <- c(85, 90, 78, 92, 85)
+
+# Calculate the median score
+median_score <- median(exam_scores)
+
+# Print the result
+print(median_score)
+```
+
+**Mode**
+
+```{r}
+
+# Define the vector of exam scores
+exam_scores <- c(85, 90, 78, 92, 85)
+
+# Compute mode using which.max()
+mode_score <- as.numeric(names(which.max(table(exam_scores))))
+
+# Print the result
+print(mode_score)
+```
+
+
+## Measures of Dispersion
+
+```{r}
+# Define the dataset
+data <- c(1, 2, 4, 7, 9)
+
+# Calculate Range
+data_range <- max(data) - min(data)
+
+# Calculate Interquartile Range (IQR)
+data_iqr <- IQR(data)
+
+# Calculate Variance
+data_variance <- var(data)
+
+# Calculate Standard Deviation
+data_sd <- sd(data)
+
+# Calculate Mean Deviation (Mean Absolute Deviation)
+data_mad <- mean(abs(data - mean(data)))
+
+# Print Results
+print(paste("Mean Deviation:", data_mad))
+print(paste("Standard Deviation:", data_sd))
+print(paste("Variance:", data_variance))
+print(paste("Range:", data_range))
+print(paste("Interquartile Range (IQR):", data_iqr))
+```
+
+
+## Measures of Skewness and Kurtosis
+
+**Normal distribution skewness**
+```{r}
+# Load the library
+library(moments)
+
+# Define the dataset
+exam_scores <- c(50, 51, 52, 54, 55, 56, 57, 58, 59, 60, 60, 61, 62, 63, 63, 64, 65, 66, 67, 67, 68, 69, 70, 72, 73, 74, 75, 78)
+
+# Calculate Skewness
+exam_skewness <- skewness(exam_scores)
+
+# Print the result
+print(exam_skewness)
+
+```
+
+
+**Left skewed**
+
+```{r}
+# Load the library
+library(moments)
+
+# Define the dataset
+exam_scores <- c(50, 53, 55, 55, 56, 57, 58, 58, 59, 59, 60, 60, 61, 61, 61, 62, 62, 62, 63, 63, 63, 64, 64, 64, 65, 65, 66, 66)
+
+# Calculate Skewness
+exam_skewness <- skewness(exam_scores)
+
+# Print the result
+print(exam_skewness)
+
+```
+
+**Right skewed**
+
+```{r}
+# Load the library
+library(moments)
+
+# Define the dataset
+exam_scores <- c(5, 7,8, 9, 10, 11, 12, 13, 14, 15, 16,17, 18, 19, 20, 21, 22, 23, 24,25, 26, 27, 28, 30, 32, 35, 38, 40, 42)
+
+# Calculate Skewness
+exam_skewness <- skewness(exam_scores)
+
+# Print the result
+print(exam_skewness)
+
+```
+
+
+**Histogram**
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(moments)
+
+
+# Calculate skewness
+exam_skewness <- skewness(exam_scores)
+
+# Create histogram with density curve
+ggplot(data.frame(exam_scores), aes(x = exam_scores)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 5, fill = "blue", color = "black", alpha = 0.6) +
+  geom_density(color = "red", linewidth = 1) +
+  labs(title = paste("Histogram and Density Curve of Exam Scores\nSkewness:", round(exam_skewness, 2)),
+       x = "Exam Scores",
+       y = "Density") +
+  theme_minimal()
+
+```
+
+
+**Kurtosis**
+```{r}
+# Load the library
+library(moments)
+
+# Define the dataset
+exam_scores <- c(55, 60, 65, 65, 70, 75, 80)
+
+# Calculate Skewness
+exam_kurt <- kurtosis(exam_scores)
+
+# Print the result
+print(exam_kurt)
+
+```
+
+**Histogram**
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(moments)
+
+# Define the dataset
+exam_scores <- c(55, 60, 65, 65, 70, 75, 80)
+
+# Create a dataframe
+exam_data <- data.frame(Score = exam_scores)
+
+# Plot histogram with density curve
+ggplot(exam_data, aes(x = Score)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 5, fill = "blue", alpha = 0.5, color = "black") +
+  geom_density(color = "red", linewidth = 1) +
+  labs(title = "Histogram and Density Curve of Exam Scores",
+       x = "Exam Scores",
+       y = "Density") +
+  theme_minimal()
+
+```
+
+## Measures of Association
+
+### Covariance
+```{r}
+# Covariance between MPG and Horsepower
+cov(mtcars$mpg, mtcars$hp)
+```
+
+
+### Correlation
+```{r}
+# Correlation between MPG and Horsepower
+cor(mtcars$mpg, mtcars$hp)  
+```
+
+#### Scatter Plot
+```{r}
+# Load necessary library
+library(ggplot2)
+
+# Scatter plot with regression line
+ggplot(mtcars, aes(x = hp, y = mpg)) +
+  geom_point(color = "blue", size = 3, alpha = 0.7) +  # Scatter plot points
+  geom_smooth(method = "lm", color = "red", se = FALSE) +  # Regression line
+  labs(title = "Scatter Plot of MPG vs Horsepower",
+       x = "Horsepower (hp)",
+       y = "Miles Per Gallon (mpg)") +
+  theme_minimal()
+
+```
+
+#### Positive Correlation
+```{r}
+cor(students$Attendance , students$Marks)  # Correlation 
+
+```
+
+```{r}
+
+# Load necessary library
+library(ggplot2)
+
+# Scatter plot with regression line
+ggplot(students, aes(x = Attendance, y = Marks)) +
+  geom_point(color = "blue", size = 3, alpha = 0.7) +  # Scatter plot points
+  geom_smooth(method = "lm", color = "red", se = FALSE) +  # Regression line
+  labs(title = "Scatter Plot",
+       x = "Attendance",
+       y = "Marks") +
+  theme_minimal()
+
+```
+
+
+#### Negative Correlation
+
+```{r}
+students <- students[!is.na(students$Age), ]
+cor(students$Age , students$Attendance)  # Correlation 
+```
+
+```{r}
+# Load necessary library
+library(ggplot2)
+
+# Scatter plot with regression line
+ggplot(students, aes(x = Age, y = Attendance)) +
+  geom_point(color = "blue", size = 3, alpha = 0.7) +  # Scatter plot points
+  geom_smooth(method = "lm", color = "red", se = FALSE) +  # Regression line
+  labs(title = "Scatter Plot",
+       x = "Age",
+       y = "Attendance") +
+  theme_minimal()
+```
+
+---
+
+# Inferential Statistical Techniques
+
+## T-test
+
+### One-Sample T-Test
+
+```{r, filename = "R"}
+# Sample data
+weights <- c(52, 55, 61, 54, 58, 59, 62, 53, 56, 57, 60, 59, 61, 64, 58)
+alpha = 0.05
+# Calculate sample size
+sample_size <- length(weights)
+sample_size
+# Calculate sample mean
+sample_mean <- mean(weights)
+sample_mean 
+# Calculate sample standard deviation (R uses n-1 by default)
+sample_sd <- sd(weights)
+sample_sd
+# Define population mean for comparison
+population_mean <- 60
+population_mean
+
+# Calculate the t-statistic
+t_statistic <- (sample_mean - population_mean) / (sample_sd / sqrt(sample_size))
+t_statistic
+# Degrees of freedom
+degrees_of_freedom <- sample_size - 1
+degrees_of_freedom
+# Calculate the p-value for a two-tailed test
+p_value <- 2 * pt(-abs(t_statistic), df = degrees_of_freedom)
+p_value
+# Decision based on p-value
+if (p_value < alpha) {
+  cat("Reject null hypothesis\n")
+} else {
+  cat("Do not reject null hypothesis\n")
+}
+```
+
+
+### Two-Sample T-Test 
+
+```{r, filenname = "R"}
+# Test scores for two independent classes
+class_a_scores <- c(85, 88, 90, 95, 78)
+class_b_scores <- c(80, 83, 79, 92, 87)
+alpha = 0.05
+# Perform independent samples t-test
+# We assume equal variances for this example with var.equal = TRUE
+t_test_result <- t.test(class_a_scores, class_b_scores, var.equal = TRUE)
+
+# Print the results
+t_test_result
+p_value = t_test_result$p.value
+if (p_value < alpha) {
+  cat("Reject null hypothesis\n")
+} else {
+  cat("Do not reject null hypothesis\n")
+}
+
+```
+
+
+### Paired Samples T-Test
+
+```{r, filename = "R"}
+# Participant weights before and after the diet
+weights_before <- c(70, 72, 75, 80, 78)
+weights_after <- c(68, 70, 74, 77, 76)
+alpha = 0.05
+# Perform paired samples t-test
+t_test_result <- t.test(weights_before, weights_after, paired = TRUE)
+
+# Print the results
+t_test_result
+# Extract p-value
+p_value = t_test_result$p.value
+# hypothesis decision
+if (p_value < alpha) {
+  cat("Reject null hypothesis\n")
+} else {
+  cat("Do not reject null hypothesis\n")
+}
+```
+
+---
+
+## ANOVA (Analysis of Variance)
+
+### One way ANOVA Test
+
+```{r}
+# Prepare the Data
+emp_referral <- c(11, 15, 18, 19, 22)
+job_portals <- c(17, 18, 21, 22, 27)
+consultancy <- c(15, 16, 18, 19, 22)
+alpha = 0.05
+# Combining the data into a single data frame
+data <- data.frame(
+  Sales = c(emp_referral, job_portals, consultancy),
+  Method = factor(rep(c("Emp Referral", "Job Portals", "Consultancy"), each = 5))
+)
+data
+# Perform ANOVA Test
+result <- aov(Sales ~ Method, data = data)
+
+# Results
+summary(result)
+# Get the summary of the ANOVA test
+summary_result <- summary(result)
+
+# Extract the p-value
+p_value <- summary_result[[1]]["Method", "Pr(>F)"]
+
+# hypothesis decision
+if (p_value < alpha) {
+  cat("Reject null hypothesis\n")
+} else {
+  cat("Do not reject null hypothesis\n")
+}
+```
+
+
+### Two way ANOVA Test in R
+
+```{r, eval=FALSE}
+install.packages("stats")
+install.packages("agricolae")
+```
+
+```{r}
+# Loading necessary library
+library(stats)
+library(agricolae)
+
+# Preparing the data
+PlantHeight <- c(15, 17, 16, 14, 15, 15, 18, 20, 19, 22, 21, 23)
+FertilizerType <- factor(rep(c('A', 'B'), each=6))
+IrrigationMethod <- factor(rep(c('X', 'Y', 'X', 'Y'), each=3))
+alpha = 0.05
+data <- data.frame(PlantHeight, FertilizerType, IrrigationMethod)
+data
+# Conducting Two-Way ANOVA
+result <- aov(PlantHeight ~ FertilizerType * IrrigationMethod, data = data)
+summary(result)
+
+```
+
+---
+
+## Chi-square
+
+### Chi-square Test of Independence
+
+```{r}
+# Data for the Chi-square Test of Independence
+data <- matrix(c(20, 10, 30, 40), nrow = 2, byrow = TRUE)
+
+# Perform the test
+result <- chisq.test(data)
+
+# Output the result
+print(result)
+```
+
+### Chi-square Goodness-of-Fit Test
+
+```{r}
+# Observed sales
+observed <- c(50, 60, 40, 50)
+
+# Expected sales (equal distribution)
+expected <- rep(sum(observed) / length(observed), length(observed))
+
+# Perform the test
+result <- chisq.test(observed, p = expected / sum(expected))
+
+# Output the result
+print(result)
+```
+
+# Regression 
+
+**Simple Linear Regression**
+
+```{r}  
+# Sample dataset  
+data <- data.frame(  
+  study_hours = c(2, 3, 5, 7, 9),  
+  exam_score  = c(50, 55, 65, 80, 90)  
+)  
+
+# Build a linear regression model  
+model <- lm(exam_score ~ study_hours, data = data)  
+
+# Summary of the model  
+summary(model)  
+```
+
+
+**Visualizing the relationship**
+
+```{r}
+plot(data$study_hours, data$exam_score, col = "blue", pch = 19, main = "Study Hours vs Exam Score")  
+abline(model, col = "red")  
+```
+
+**Linear Regression**
+```{r}
+# Load necessary library
+library(ggplot2)
+
+# Sample dataset
+house_data <- data.frame(
+  Size = c(1500, 1800, 2100, 2500, 1300, 1700, 2200, 2700, 1600, 1400, 
+           1900, 2300, 2800, 2900, 2000, 2400, 3000, 2600, 3100, 3200, 
+           3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000, 4100, 4200),
+  Price = c(300, 340, 400, 450, 260, 320, 420, 480, 310, 280, 
+            360, 430, 490, 510, 370, 440, 520, 460, 530, 550, 
+            570, 590, 610, 630, 650, 670, 690, 710, 730, 750)
+)
+
+# Fit linear regression model
+model <- lm(Price ~ Size, data = house_data)
+
+# Summary of the model
+summary(model)
+```
+
+
+**Plot the data and regression line**
+
+```{r}
+ggplot(house_data, aes(x = Size, y = Price)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(title = "House Size vs Price Regression",
+       x = "House Size (sq.ft)",
+       y = "House Price ($1000s)")
+```
+
+---
+
+# Lab Exam
+
+## Load the data1 dataset
+download the dataset from this [link](https://1drv.ms/x/c/ff525616fe275280/EYBSJ_4WVlIggP8sgwMAAAABDihUL4pwAZ7eeOv2c17_tA?e=sZf4lD)
+```{r}
+library(readxl)
+data1 = read_excel("Organic_Products_Survey_Final.xlsx")
+str(data1)
+```
+
+## Install dplyr package
+```{r, eval=FALSE}
+install.packages("dplyr")
+```
+
+## Rename the variable names
+```{r}
+library(dplyr)
+data1 = data1 %>% rename('Age' = 'Age Group')
+data1 = data1 %>% rename('Gender'='Gender')
+data1 = data1 %>% rename('Education'='Education Level')
+data1 = data1 %>% rename('Income'='Income Level')
+
+data1 <- data1 %>% rename(
+  'HC1' = 'I reflect about my health a lot.'
+)
+
+data1 <- data1 %>% rename(
+  'HC2' = 'I am very self-conscious about my health.'
+)
+
+data1 <- data1 %>% rename(
+  'HC3' = 'I am alert to changes in my health.'
+)
+
+data1 <- data1 %>% rename(
+  'HC4' = 'I am usually aware of my health.'
+)
+
+data1 <- data1 %>% rename(
+  'HC5' = 'I take responsibility for the state of my health.'
+)
+
+data1 <- data1 %>% rename(
+  'EC1' = 'I am concerned about the environment.'
+)
+
+data1 <- data1 %>% rename(
+  'EC2' = 'Humans must live in harmony with nature to survive.'
+)
+
+data1 <- data1 %>% rename(
+  'EC3' = 'I am willing to reduce my consumption to help protect the environment.'
+)
+
+data1 <- data1 %>% rename(
+  'EC4' = 'Environmental protection is an important issue to me.'
+)
+
+data1 <- data1 %>% rename(
+  'EC5' = 'I would be willing to pay more for environmentally friendly products.'
+)
+
+data1 <- data1 %>% rename(
+  'PI1' = 'I intend to purchase organic farm products in the near future.'
+)
+
+data1 <- data1 %>% rename(
+  'PI2' = 'I will make an effort to buy organic farm products.'
+)
+
+data1 <- data1 %>% rename(
+  'PI3' = 'I am likely to purchase organic farm products.'
+)
+
+data1 <- data1 %>% rename(
+  'PI4' = 'I plan to buy organic farm products regularly.'
+)
+
+data1 <- data1 %>% rename(
+  'PI5' = 'I will recommend organic farm products to others.'
+)
+
+```
+
+## Convert categorical variables into factors
+
+```{r}
+data1$Age = factor(data1$Age, levels = c( "18-25 Years",	"26-35 Years", "36-45 Years",	"46-55 Years",	"Above 55 Years"), ordered = TRUE)
+
+data1 = data1 %>% mutate('Gender' = factor(Gender, 
+                      levels = c("Male", "Female")))
+data1 = data1 %>% mutate('Education' = factor(Education, 
+                         levels = c("High School", "Diploma", 
+                                    "Undergraduate", "Postgraduate", "Doctorate"), 
+                         ordered = TRUE))
+
+data1 = data1 %>% mutate('Income' = factor(Income, 
+                      levels = c("0 - 2  Lakhs", "2 - 5  Lakhs", 
+                                 "5 - 10  Lakhs", "Above 10 Lakhs"), 
+                      ordered = TRUE))
+
+```
+
+## Recode likert sclae to Interval or numeric (1-5)
+
+```{r}
+data1 <- data1 %>% mutate_at(
+  c('HC1', 'HC2', 'HC3', 'HC4', 'HC5', 
+    'EC1', 'EC2', 'EC3', 'EC4', 'EC5',
+    'PI1', 'PI2', 'PI3', 'PI4', 'PI5'), 
+  list(~ recode(., 
+    'Strongly Disagree' = 1, 
+    'Disagree' = 2, 
+    'Neutral' = 3, 
+    'Agree' = 4, 
+    'Strongly Agree' = 5))
+)
+```
+
+## Export the coded data
+
+```{r, eval=FALSE}
+install.packages("writexl")
+```
+
+```{r}
+library(writexl)
+write_xlsx(data1, "data2.xlsx")
+```
+
+```{r}
+data2 = read_excel("data2.xlsx")
+str(data2)
+```
+
+
+## Descriptive statistics of demographic variables
+```{r}
+summary(data1$Age)
+summary(data1$Gender)
+summary(data1$Education)
+summary(data1$Income)
+```
+
+## Creating Study variables by rowmeans
+```{r}
+# Compute the mean for Health Consciousness
+data1 <- data1 %>%
+  mutate(Health_Consciousness = rowMeans(select(., HC1, HC2, HC3, HC4, HC5), na.rm = TRUE))
+
+# Compute the mean for Environmental Concern
+data1 <- data1 %>%
+  mutate(Environmental_Concern = rowMeans(select(., EC1, EC2, EC3, EC4, EC5), na.rm = TRUE))
+
+# Compute the mean for Purchase Intention
+data1 <- data1 %>%
+  mutate(Purchase_Intention = rowMeans(select(., PI1, PI2, PI3, PI4, PI5), na.rm = TRUE))
+```
+
+## Descriptives for Study variables
+
+```{r}
+mean(data1$Health_Consciousness)
+sd(data1$Health_Consciousness)
+var(data1$Health_Consciousness)
+mean(data1$Environmental_Concern)
+sd(data1$Environmental_Concern)
+var(data1$Environmental_Concern)
+mean(data1$Purchase_Intention)
+sd(data1$Purchase_Intention)
+var(data1$Purchase_Intention)
+
+summary(data1$Health_Consciousness)
+summary(data1$Environmental_Concern)
+summary(data1$Purchase_Intention)
+
+```
+
+## T Test
+
+### Conduct t-test for Health Consciousness, Environment concern, and Purchase Intention on Gender.
+
+```{r}
+t_test_HC <- t.test(data1$Health_Consciousness ~ data1$Gender, data = data1, var.equal = TRUE)
+t_test_HC
+
+# Conduct t-test for Environmental Concern
+t_test_EC <- t.test(data1$Environmental_Concern ~ data1$Gender, data = data1, var.equal = TRUE)
+t_test_EC
+
+# Conduct t-test for Purchase Intention
+t_test_PI <- t.test(data1$Purchase_Intention ~ data1$Gender, data = data1, var.equal = TRUE)
+t_test_PI
+
+```
+
+## Anova
+### ANOVA for Health Consciousness across Education Levels
+
+```{r}
+anova_HC_Edu <- aov(Health_Consciousness ~ Education, data = data1)
+summary(anova_HC_Edu)
+
+# ANOVA for Environmental Concern across Education Levels
+anova_EC_Edu <- aov(Environmental_Concern ~ Education, data = data1)
+summary(anova_EC_Edu)
+
+# ANOVA for Purchase Intention across Education Levels
+anova_PI_Edu <- aov(Purchase_Intention ~ Education, data = data1)
+summary(anova_PI_Edu)
+
+```
+
+## Correlation
+
+```{r}
+cor_matrix <- cor(data1[, c("Health_Consciousness", "Environmental_Concern", "Purchase_Intention")], method = "pearson")
+cor_matrix
+```
+
+## Regression
+
+```{r}
+# Run Multiple Linear Regression
+regression_model <- lm(Purchase_Intention ~ Health_Consciousness + Environmental_Concern, data = data1)
+
+summary(regression_model)
+```
+
+---
+
